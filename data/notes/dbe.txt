@@ -1,0 +1,124 @@
+Disease Burden Estimation
+YLD (Years Lived with Disability)
+YLD Formula
+YLD = I × DW × L
+I is the number of incident cases in the reference period 
+DW is the disability weight (in the range 0–1)
+L is the average duration of disability (measured in years).
+
+
+Phase-Based YLD
+YLD=∑(Cases_phase×Duration_phase×DW_phase)
+Source:
+The global burden of cancer attributable to risk factors, 2010–19: a systematic analysis for the Global Burden of Disease Study 2019
+Tran, Khanh Bao et al.
+The Lancet, Volume 400, Issue 10352, 563 - 591
+Phases (One-line Explanation Each)
+Diagnosis & Primary Therapy Phase
+ Period of diagnosis and active treatment (surgery/chemo/radiation).
+
+
+Controlled Phase
+ Disease is stable or in remission with lower disability.
+
+
+Metastatic Phase
+ Cancer has spread to other organs with higher severity.
+
+
+Terminal Phase
+ Final stage before death with highest disability.
+
+
+
+What Do We Have From the Formula
+Incidence → Available from 1982 to 2019
+
+Number of Districts with Available Data by Year:
+
+
+Disability Weights → Given for each phase (GBD provided)
+Disability weights quantify health loss severity, ranging from 0 to 1
+
+What We Do NOT Have
+Duration per phase → Not available
+
+
+
+What Do We Need
+Survival Time to derive duration.
+How is survival time linked to the duration phase?
+If so, what data is required to estimate survival time?
+Do we have the data? If not can we collect or obtain?
+Are there other methods to derive duration phase
+Why Survival Time is Needed
+Because:
+Total Survival Time=∑Duration of all disease phases
+This means:
+Survival time directly determines how long each phase lasts
+
+
+Phase durations are derived by partitioning survival time
+Some of the methods to do survival analysis
+
+Full Example (End-to-End YLD Calculation)
+Suppose for a district:
+Incidence (new cases) = 1,000 cases
+
+
+Average survival time = 5 years.
+We split survival into phases:
+Phase
+Duration
+Disability Weight (DW)
+Diagnosis
+0.5 year
+0.30
+Controlled
+3 years
+0.10
+Metastatic
+1 year
+0.45
+Terminal
+0.5 year
+0.60
+
+
+Step-wise Phase YLD Calculation
+1️⃣ Diagnosis Phase
+YLD=1000×0.5×0.30=150
+2️⃣ Controlled Phase
+YLD=800×3×0.10=240
+3️⃣ Metastatic Phase
+YLD=500×1×0.45=225
+4️⃣ Terminal Phase
+YLD=100×0.5×0.60=30
+Total YLD
+Total YLD = 150 + 240+ 225 + 30 = 645
+So,
+1,000 incident cancer cases result in 645 Years Lived with Disability.
+This captures severity across all disease stages.
+
+YLL (Years of Life Lost)
+YLL Formula
+YLL = Deaths × Life Expectancy at Age of Death
+
+Source:
+https://en.wikipedia.org/wiki/Disability-adjusted_life_year
+
+von der Lippe, E., Devleesschauwer, B., Gourley, M. et al. Reflections on key methodological decisions in national burden of disease assessments. Arch Public Health 78, 137 (2020). https://doi.org/10.1186/s13690-020-00519-7
+
+
+What We Do NOT Have
+Death data (mortality counts) at district level.
+
+
+
+What Else We Have
+Life Expectancy → Available from life tables (GBD).
+
+
+
+Data Gap
+Need district-level mortality.
