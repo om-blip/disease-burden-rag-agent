@@ -2,17 +2,17 @@
 
 A conversational AI system for exploring **Disease Burden Estimation (DBE)** concepts using research papers and epidemiological literature.
 
-The system uses **Retrieval-Augmented Generation (RAG)** with hybrid retrieval and reranking to answer questions about epidemiological metrics such as **DALY, YLL, and YLD**.
+The system uses **Retrieval-Augmented Generation (RAG)** with **hybrid retrieval (TF-IDF + FAISS vector search)** and **cross-encoder reranking** to answer questions about epidemiological metrics such as **DALY, YLL, and YLD**.
 
 The chatbot retrieves relevant passages from research papers, reranks them, and generates answers with **source citations**.
 
 ---
 
-## Features
+# Features
 
 - Conversational chatbot interface
-- Hybrid document retrieval (TF-IDF + semantic embeddings)
-- Cross-encoder reranking for improved retrieval quality
+- Hybrid document retrieval (**TF-IDF + FAISS vector search**)
+- Cross-encoder reranking for improved retrieval relevance
 - Source citations from research papers
 - Retrieval confidence scoring
 - Web search fallback for low-confidence retrieval
@@ -22,27 +22,44 @@ The chatbot retrieves relevant passages from research papers, reranks them, and 
 
 ---
 
-## System Architecture
+# System Architecture
 
-User  
-↓  
-Streamlit Chat Interface  
-↓  
-FastAPI Backend  
-↓  
-Hybrid Retrieval (TF-IDF + Embedding Search)  
-↓  
-Cross-Encoder Reranker  
-↓  
-Context Construction  
-↓  
-LLM (Groq Llama-3.1)  
-↓  
-Answer Generation with Sources  
+```
+Research Papers (PDFs)
+        ↓
+Document Parsing
+        ↓
+Text Chunking
+        ↓
+Hybrid Retrieval
+(TF-IDF + FAISS Vector Search)
+        ↓
+Cross-Encoder Reranking
+        ↓
+Context Construction
+        ↓
+LLM (Groq LLaMA-3.1)
+        ↓
+Answer Generation with Sources
+```
+
+Frontend and backend communication:
+
+```
+User
+↓
+Streamlit Chat Interface
+↓
+FastAPI Backend
+↓
+RAG Pipeline
+↓
+Response
+```
 
 ---
 
-## Project Structure
+# Project Structure
 
 ```
 disease-burden-rag-agent
@@ -69,7 +86,7 @@ disease-burden-rag-agent
 
 ---
 
-## Installation
+# Installation
 
 Clone the repository
 
@@ -86,7 +103,7 @@ pip install -r requirements.txt
 
 ---
 
-## Environment Variables
+# Environment Variables
 
 Create a `.env` file in the project root.
 
@@ -94,11 +111,11 @@ Create a `.env` file in the project root.
 GROQ_API_KEY=your_api_key_here
 ```
 
-Example template is provided in `.env.example`.
+An example template is provided in `.env.example`.
 
 ---
 
-## Running the Application
+# Running the Application
 
 Start the backend server
 
@@ -106,7 +123,7 @@ Start the backend server
 uvicorn app.main:app --reload
 ```
 
-Backend will run at:
+Backend will run at
 
 ```
 http://127.0.0.1:8000
@@ -120,7 +137,7 @@ streamlit run frontend/app.py
 
 ---
 
-## Example Queries
+# Example Queries
 
 You can ask questions such as:
 
@@ -132,36 +149,37 @@ You can ask questions such as:
 
 ---
 
-## Tech Stack
+# Tech Stack
 
 - Python
 - FastAPI
 - Streamlit
 - LangChain
 - Sentence Transformers
+- FAISS
 - Scikit-learn
 - Groq LLM API
 - NumPy
 
 ---
 
-## Retrieval Pipeline
+# Retrieval Pipeline
 
-1. User submits a query
-2. Hybrid retrieval retrieves relevant document chunks
-3. Cross-encoder reranker selects the most relevant passages
-4. Context is constructed from top passages
-5. LLM generates an answer using the retrieved context
-6. Response includes sources and retrieval confidence
+1. User submits a query  
+2. Hybrid retrieval retrieves relevant document chunks  
+3. Cross-encoder reranker selects the most relevant passages  
+4. Context is constructed from top passages  
+5. LLM generates an answer using the retrieved context  
+6. Response includes sources and retrieval confidence  
 
 ---
 
-## Future Improvements
+# Future Improvements
 
-- FAISS vector database for faster semantic search
 - Query rewriting agent for improved retrieval
-- RAG debugging dashboard (show retrieved chunks and scores)
-- Automatic paper metadata extraction
+- RAG debugging dashboard (visualizing retrieved chunks and scores)
+- Persistent FAISS index storage
+- Automatic research paper metadata extraction
 - Retrieval evaluation benchmarks
 
 ---
